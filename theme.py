@@ -18,6 +18,12 @@ QTabBar::tab:selected { background: #FFFFFF; color: #1D4ED8; border-bottom-color
 QScrollBar:vertical { background: #F1F5F9; width: 11px; }
 QScrollBar::handle:vertical { background: #AABBD0; border-radius: 5px; min-height: 25px; }
 QMessageBox { background: #F6F8FC; }
+#modernProfileHeading { color: #14253C; font-size: 21px; font-weight: 700; }
+#modernProfileDescription { color: #64748B; font-size: 12px; }
+#modernPrimaryButton { color: #FFFFFF; background: #2563EB; border: 1px solid #1D4ED8; }
+#modernPrimaryButton:hover { background: #1D4ED8; }
+#modernProfileTabs QTabBar::tab { padding: 10px 14px; }
+
 #modernRoot, #modernContent { background: #F6F8FC; }
 #modernSidebar { background: #12243C; border: none; }
 #modernSidebar QLabel { color: #B7C8DF; }

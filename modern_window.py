@@ -27,7 +27,17 @@ class ModernMainWindow(MainWindow):
     def init_tabs(self):
         super().init_tabs()
         from records_enhancements import enhance_student_list
+        from profile_enhancements import enhance_profile
         enhance_student_list(self.list_tab)
+        enhance_profile(self.add_tab)
+        enhance_profile(self.info_tab)
+
+    def open_add_tab(self):
+        # AddTab is recreated after saving a new record; enhance replacements too.
+        from profile_enhancements import enhance_profile
+        if hasattr(self, "add_tab"):
+            enhance_profile(self.add_tab)
+        super().open_add_tab()
 
     def _build_shell(self):
         # Reparent the original stack into a layout, keeping its page instances
