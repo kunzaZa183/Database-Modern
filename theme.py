@@ -18,6 +18,18 @@ QTabBar::tab:selected { background: #FFFFFF; color: #1D4ED8; border-bottom-color
 QScrollBar:vertical { background: #F1F5F9; width: 11px; }
 QScrollBar::handle:vertical { background: #AABBD0; border-radius: 5px; min-height: 25px; }
 QMessageBox { background: #F6F8FC; }
+#modernRoot, #modernContent { background: #F6F8FC; }
+#modernSidebar { background: #12243C; border: none; }
+#modernSidebar QLabel { color: #B7C8DF; }
+#modernBrand { color: #FFFFFF; font-size: 20px; font-weight: 700; }
+#modernSubtitle { color: #A9BFD9; font-size: 12px; }
+#modernNavButton { color: #DFE9F8; background: transparent; border: 0; text-align: left; padding: 12px 14px; font-size: 14px; }
+#modernNavButton:hover { background: #254365; }
+#modernNavButton[active="true"] { background: #2C5790; color: white; }
+#modernNavButton:disabled { color: #74879E; }
+#modernPageTitle { font-size: 26px; font-weight: 700; color: #14253C; }
+#modernPageSubtitle { font-size: 13px; color: #63748A; }
+
 """
 
 def apply_theme(app):
