@@ -15,6 +15,7 @@ class ModernMainWindow(MainWindow):
         2: ("Add student", "Create a new student record."),
         3: ("Student profile", "Review and edit student details."),
         4: ("Reference codes", "Manage project and activity codes."),
+        5: ("Dashboard", "Overview of the loaded sponsorship records."),
     }
 
     def __init__(self):
@@ -31,6 +32,14 @@ class ModernMainWindow(MainWindow):
         enhance_student_list(self.list_tab)
         enhance_profile(self.add_tab)
         enhance_profile(self.info_tab)
+        from dashboard import DashboardPage
+        self.dashboard_page = DashboardPage(self)
+        self.stack.addWidget(self.dashboard_page)
+
+    def open_dashboard(self):
+        if hasattr(self, "dashboard_page"):
+            self.dashboard_page.refresh()
+            self.stack.setCurrentWidget(self.dashboard_page)
 
     def open_add_tab(self):
         # AddTab is recreated after saving a new record; enhance replacements too.
@@ -65,6 +74,7 @@ class ModernMainWindow(MainWindow):
 
         self.nav_buttons = []
         for label, handler in (
+            ("Dashboard", self.open_dashboard),
             ("Student records", self.open_list_tab),
             ("Add student", self.open_add_tab),
             ("Reference codes", self.open_edit_code_tab),
@@ -102,7 +112,7 @@ class ModernMainWindow(MainWindow):
         ready = hasattr(self, "list_tab")
         for button in self.nav_buttons:
             button.setEnabled(ready)
-        active_index = {1: 0, 2: 1, 4: 2}.get(index, -1)
+        active_index = {5: 0, 1: 1, 2: 2, 4: 3}.get(index, -1)
         for i, button in enumerate(self.nav_buttons):
             button.setProperty("active", i == active_index)
             button.style().unpolish(button)

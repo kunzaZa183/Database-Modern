@@ -18,6 +18,12 @@ QTabBar::tab:selected { background: #FFFFFF; color: #1D4ED8; border-bottom-color
 QScrollBar:vertical { background: #F1F5F9; width: 11px; }
 QScrollBar::handle:vertical { background: #AABBD0; border-radius: 5px; min-height: 25px; }
 QMessageBox { background: #F6F8FC; }
+#dashboardMetricCard { background: #FFFFFF; border: 1px solid #DCE5F0; border-radius: 12px; }
+#dashboardMetricLabel { color: #64748B; font-size: 13px; }
+#dashboardMetricValue { color: #17375F; font-size: 30px; font-weight: 700; }
+#dashboardSectionTitle { color: #17375F; font-size: 17px; font-weight: 700; }
+#dashboardBreakdown { background: #FFFFFF; border: 1px solid #DCE5F0; border-radius: 10px; padding: 14px; color: #334155; font-size: 13px; }
+
 #modernProfileHeading { color: #14253C; font-size: 21px; font-weight: 700; }
 #modernProfileDescription { color: #64748B; font-size: 12px; }
 #modernPrimaryButton { color: #FFFFFF; background: #2563EB; border: 1px solid #1D4ED8; }
