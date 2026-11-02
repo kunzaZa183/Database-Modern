@@ -4,8 +4,7 @@ from PyQt6.QtCore import (
     QModelIndex,
 )
 from models import StudentCreate
-from subtabs import *
-from data import *
+from datetime import date
 import sqlite3
 
 
