@@ -156,7 +156,9 @@ class GeneralInfo(QWidget):
     def __init__(self, controller):
         super().__init__()
         self.controller = controller
-        app.setStyleSheet(
+        # Style this widget locally; do not depend on a global QApplication
+        # variable that is undefined when imported by main.py.
+        self.setStyleSheet(
             """
             QTextEdit {
                 border: 1px solid #888;
