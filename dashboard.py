@@ -3,7 +3,7 @@ from collections import Counter
 from PyQt6.QtCore import Qt
 from PyQt6.QtWidgets import (
     QFrame, QGridLayout, QHBoxLayout, QLabel, QPushButton,
-    QScrollArea, QVBoxLayout, QWidget
+    QScrollArea, QVBoxLayout, QWidget, QProgressBar
 )
 
 
@@ -40,6 +40,8 @@ class DashboardPage(QWidget):
             Qt.TextInteractionFlag.TextSelectableByMouse
         )
         layout.addWidget(self.status_details)
+        self.status_bars = QVBoxLayout()
+        layout.addLayout(self.status_bars)
 
         project_heading = QLabel("Students by project")
         project_heading.setObjectName("dashboardSectionTitle")
@@ -50,6 +52,8 @@ class DashboardPage(QWidget):
             Qt.TextInteractionFlag.TextSelectableByMouse
         )
         layout.addWidget(self.project_details)
+        self.project_bars = QVBoxLayout()
+        layout.addLayout(self.project_bars)
         actions = QHBoxLayout()
         refresh = QPushButton("Refresh overview")
         refresh.clicked.connect(self.refresh)
@@ -74,6 +78,24 @@ class DashboardPage(QWidget):
         grid.addWidget(card, row, col)
         return number
 
+    def _render_bars(self, target, counts):
+        while target.count():
+            item = target.takeAt(0)
+            widget = item.widget()
+            if widget is not None:
+                widget.deleteLater()
+        total = sum(counts.values())
+        for name, count in counts.most_common(8):
+            label = QLabel(f"{name}: {count}")
+            label.setWordWrap(True)
+            bar = QProgressBar()
+            bar.setRange(0, max(total, 1))
+            bar.setValue(count)
+            bar.setTextVisible(False)
+            bar.setAccessibleName(f"{name}: {count} of {total}")
+            target.addWidget(label)
+            target.addWidget(bar)
+
     def refresh(self):
         # Read the already loaded model only. No database writes or new SQL.
         students = list(self.controller.all_model.students.values())
@@ -94,6 +116,8 @@ class DashboardPage(QWidget):
         self.status_details.setText("\n".join(
             f"{name}: {count}" for name, count in statuses.most_common()
         ) or "No records yet")
+        self._render_bars(self.status_bars, statuses)
+        self._render_bars(self.project_bars, projects)
         self.project_details.setText("\n".join(
             f"{name}: {count}" for name, count in projects.most_common()
         ) or "No records yet")
