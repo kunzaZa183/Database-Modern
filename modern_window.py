@@ -24,6 +24,11 @@ class ModernMainWindow(MainWindow):
         self.stack.currentChanged.connect(self._sync_navigation)
         self._sync_navigation(self.stack.currentIndex())
 
+    def init_tabs(self):
+        super().init_tabs()
+        from records_enhancements import enhance_student_list
+        enhance_student_list(self.list_tab)
+
     def _build_shell(self):
         # Reparent the original stack into a layout, keeping its page instances
         # and all legacy controller methods intact.
